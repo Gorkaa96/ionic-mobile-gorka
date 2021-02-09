@@ -73,7 +73,7 @@ export class EditPage implements OnInit {
     });
     toast.present();
   }
-// TODO CON ESTA FUNCION CREO UN BAR, NO LO ACTUALIZA
+  
   updateMobile() {
     this.mobile = this.mobileForm.value;
     let id = this.id;
