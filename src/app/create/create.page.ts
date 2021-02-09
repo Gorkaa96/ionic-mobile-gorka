@@ -65,11 +65,9 @@ export class CreatePage implements OnInit {
 
   saveMobile() {
     this.mobile = this.mobileForm.value;
-    let nextKey = this.strId;
-    let keyNum = Number.parseInt(nextKey);
-    let IdNum = keyNum+1
-    this.mobile.id = IdNum.toString();
+    let nextKey = Number.parseInt(this.strId)+1;
+    this.mobile.id = nextKey.toString();
     this.mobiledbService.setItem(this.mobile.id, this.mobile );
-    console.warn(this.mobileForm.value);
+    console.warn(this.mobileForm.value);;
     }
 }
