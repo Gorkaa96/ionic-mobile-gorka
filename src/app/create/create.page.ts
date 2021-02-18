@@ -37,7 +37,7 @@ export class CreatePage implements OnInit {
 
   async onSubmit() {
     const toast = await this.toastController.create({
-      header: 'Guardar movil',
+      header: 'Guardar película',
       position: 'top',
       buttons: [
         {
@@ -60,15 +60,4 @@ export class CreatePage implements OnInit {
     });
     toast.present();
   }
-<<<<<<< HEAD
-=======
-
-  saveMobile() {
-    this.mobile = this.mobileForm.value;
-    let nextKey = Number.parseInt(this.strId)+1;
-    this.mobile.id = nextKey.toString();
-    this.mobiledbService.setItem(this.mobile.id, this.mobile );
-    console.warn(this.mobileForm.value);
-    }
->>>>>>> ba13a9248a77a0b6a5ec887134faae1b8de058fb
 }
