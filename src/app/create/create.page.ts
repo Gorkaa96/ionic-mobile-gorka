@@ -4,6 +4,7 @@ import { MobiledbService } from '../core/mobiledb.service';
 import { Router } from '@angular/router';
 import { IonMenu, ToastController } from '@ionic/angular';
 import { IMobile } from '../share/interfaces';
+import { MobilecrudService } from '../core/mobilecrud.service';
 
 
 @Component({
@@ -19,15 +20,11 @@ export class CreatePage implements OnInit {
   mobileForm: FormGroup;
   constructor(
     private router: Router,
-    private mobiledbService: MobiledbService,
+    private mobilecrudService: MobilecrudService,
     public toastController: ToastController
   ) { }
 
   ngOnInit() {
-    this.mobiledbService.getLength().then(
-      (data: Number) => {
-        this.strId = data.toString();
-      })
     this.mobileForm = new FormGroup({
       name: new FormControl(''),
       company: new FormControl(''),
@@ -48,7 +45,8 @@ export class CreatePage implements OnInit {
           icon: 'save',
           text: 'ACEPTAR',
           handler: () => {
-            this.saveMobile();
+            this.mobile=this.mobileForm.value;
+            this.mobilecrudService.create_Mobile(this.mobile);
             this.router.navigate(['home']);
           }
         }, {
@@ -62,6 +60,8 @@ export class CreatePage implements OnInit {
     });
     toast.present();
   }
+<<<<<<< HEAD
+=======
 
   saveMobile() {
     this.mobile = this.mobileForm.value;
@@ -70,4 +70,5 @@ export class CreatePage implements OnInit {
     this.mobiledbService.setItem(this.mobile.id, this.mobile );
     console.warn(this.mobileForm.value);
     }
+>>>>>>> ba13a9248a77a0b6a5ec887134faae1b8de058fb
 }

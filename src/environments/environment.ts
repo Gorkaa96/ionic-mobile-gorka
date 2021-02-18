@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  firebase : {
+    apiKey: "AIzaSyAlEbLH1tnj_llxlDFFafXm7fQoQJIlqyk",
+    authDomain: "ionic-mobile-gorka.firebaseapp.com",
+    databaseURL: "https://ionic-mobile-gorka-default-rtdb.firebaseio.com",
+    projectId: "ionic-mobile-gorka",
+    storageBucket: "ionic-mobile-gorka.appspot.com",
+    messagingSenderId: "1092675079531",
+    appId: "1:1092675079531:web:e4c85aff4d9db9649d102e"
+  }
 };
 
 /*

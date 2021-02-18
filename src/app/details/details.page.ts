@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MobiledbService } from '../core/mobiledb.service';
 import { IMobile } from '../share/interfaces';
 import { ToastController } from '@ionic/angular';
+import { MobilecrudService } from '../core/mobilecrud.service';
 
 @Component({
   selector: 'app-details',
@@ -17,15 +18,35 @@ export class DetailsPage implements OnInit {
   constructor(
     private activatedrouter: ActivatedRoute,
     private router: Router,
-    private mobilebService: MobiledbService,
+    private mobilecrudService: MobilecrudService,
     public toastController: ToastController
   ) { }
   
   ngOnInit() {
     this.id = this.activatedrouter.snapshot.params.id;
-    this.mobilebService.getItem(this.id).then(
-      (data: IMobile) => this.mobile = data
-    );
+    this.mobilecrudService.read_Mobile().subscribe(data => {
+      let mobiles = data.map(e => {       
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          name: e.payload.doc.data()['name'],
+          company: e.payload.doc.data()['company'],
+          price: e.payload.doc.data()['price'],
+          inches: e.payload.doc.data()['inches'],
+          colors: e.payload.doc.data()['colors'],
+          image: e.payload.doc.data()['image']
+        };
+      })
+      // tengo todos los móviles
+      mobiles.forEach(element => {
+        if(element.id == this.id){
+            
+            this.mobile = element;
+        }
+      });
+
+      console.log(this.mobile);
+    });
   }
 
   editRecord(mobile) {
@@ -41,7 +62,7 @@ export class DetailsPage implements OnInit {
           icon: 'delete',
           text: 'ACEPTAR',
           handler: () => {
-            this.mobilebService.remove(id);
+            this.mobilecrudService.delete_Mobile(id);
             this.router.navigate(['home']);
           }
         }, {
